@@ -33,5 +33,24 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        var drinksList = [];
+        var foodList = [];
+        var sweetsList = [];
+        $.post('@(Url.Action("AllProducts","User"))', "", function (data, status) {
+            drinksList = data.Drinks;
+            foodList = data.Food;
+            sweetsList = data.Sweets;
+        });
+        $(document).on('click', '#DrinksBox', function () {
+            alert(drinksList[0]);
+        });
+        $(document).on('click', '#FoodBox', function () {
+            alert(foodList[0]);
+        });
+        $(document).on('click', '#SweetsBox', function () {
+            alert(sweetsList[0]);
+        });
 
+    });
 </script>
