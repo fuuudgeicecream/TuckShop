@@ -1,5 +1,4 @@
-﻿
-<div class="col-lg-12">
+﻿<div class="col-lg-12">
     <br />
 </div>
 
@@ -8,49 +7,104 @@
     <p>
         Get all the snacks you need.
     </p>
-
 </div>
-
 
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-md-offset-1">
-            <div class="box text-center">
-                <span class="text-center" id="DrinksBox">Drinks</span>
+            <div class="box text-center" id="DrinksBox">
+                <span class="text-center" id="drinksContent">
+                    Drinks
+                </span>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="box text-center">
-                <span class="text-center" id="FoodBox">Food</span>
+            <div class="box text-center"  id="FoodBox">
+                <span class="text-center" id="foodContent">
+                    Food
+                </span>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="box text-center">
-                <span class="text-center" id="SweetsBox">Sweets</span>
+            <div class="box text-center" id="SweetsBox">
+                <span class="text-center" id="sweetsContent">
+                    Sweets
+                </span>
             </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var drinksList = [];
-        var foodList = [];
-        var sweetsList = [];
-        $.post('@(Url.Action("AllProducts","User"))', "", function (data, status) {
-            drinksList = data.Drinks;
-            foodList = data.Food;
-            sweetsList = data.Sweets;
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var drinksList = [];
+            var foodList = [];
+            var sweetsList = [];
+            $.post('@(Url.Action("AllProducts","User"))', "", function (data, status) {
+                drinksList = data.drinks;
+                foodList = data.food;
+                sweetsList = data.sweets;
+            });
+            state = {
+                Drinks: false,
+                Food: false,
+                Sweets: false
+            };
+            $(document).on('click', '#DrinksBox', function () {
+                if (state.Drinks == false) {
+                    $("#drinksContent").html("");
+                    var html = "<ul>";
+                    var list = "";
+                    $.each(drinksList, function (index, value) {
+                        list = list + "<li>" + value.name + "</li>";
+                    });
+                    list = list + "</ul>";
+                    html = html + list;
+                    $("#drinksContent").append(html);
+                    state.Drinks = true;
+                } else {
+                    $("#drinksContent").html("");
+                    $("#drinksContent").append('Drinks');
+                    state.Drinks = false;
+                }
+               
+            });
+            $(document).on('click', '#FoodBox', function () {
+                if (state.Food == false) {
+                    $("#foodContent").html("");
+                    var html = "<ul>";
+                    var list = "";
+                    $.each(foodList, function (index, value) {
+                        list = list + "<li>" + value.name + "</li>";
+                    });
+                    list = list + "</ul>";
+                    html = html + list;
+                    $("#foodContent").append(html);
+                    state.Food = true;
+                } else {
+                    $("#foodContent").html("");
+                    $("#foodContent").append('Food');
+                    state.Food = false;
+                }
+            });
+            $(document).on('click', '#SweetsBox', function () {
+                if (state.Sweets == false) {
+                    $("#sweetsContent").html("");
+                    var html = "<ul>";
+                    var list = "";
+                    $.each(sweetsList, function (index, value) {
+                        list = list + "<li>" + value.name + "</li>";
+                    });
+                    list = list + "</ul>";
+                    html = html + list;
+                    $("#sweetsContent").append(html);
+                    state.Sweets = true;
+                } else {
+                    $("#sweetsContent").html("");
+                    $("#sweetsContent").append('Sweets');
+                    state.Sweets = false;
+                }
+            });
         });
-        $(document).on('click', '#DrinksBox', function () {
-            alert(drinksList[0]);
-        });
-        $(document).on('click', '#FoodBox', function () {
-            alert(foodList[0]);
-        });
-        $(document).on('click', '#SweetsBox', function () {
-            alert(sweetsList[0]);
-        });
+    </script>
 
-    });
-</script>
