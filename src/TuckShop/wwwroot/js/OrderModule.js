@@ -17,7 +17,7 @@
             var html = "<ul>";
             var list = "";
             $.each(drinksList, function (index, value) {
-                list = list + "<li class='selectItem' data-price="+value.price+" data-id="+value.id+" data-val="+value.name+">" + value.name + "</li>";
+                list = list + "<li class='selectItem' data-price='"+value.price+"' data-id='"+value.id+"' data-val='"+value.name+"'>" + value.name + "</li>";
             });
             list = list + "</ul>";
             html = html + list;
@@ -41,7 +41,7 @@
             var html = "<ul>";
             var list = "";
             $.each(foodList, function (index, value) {
-                list = list + "<li class='selectItem' data-price=" + value.price + " data-id=" + value.id + " data-val=" + value.name + ">" + value.name + "</li>";
+                list = list + "<li class='selectItem' data-price=" + value.price + " data-id=" + value.id + " data-val='" + value.name + "'>" + value.name + "</li>";
             });
             list = list + "</ul>";
             html = html + list;
@@ -65,7 +65,7 @@
             var html = "<ul>";
             var list = "";
             $.each(sweetsList, function (index, value) {
-                list = list + "<li class='selectItem' data-price=" + value.price + " data-id=" + value.id + " data-val=" + value.name + ">" + value.name + "</li>";
+                list = list + "<li class='selectItem' data-price=" + value.price + " data-id=" + value.id + " data-val='" + value.name + "'>" + value.name + "</li>";
             });
             list = list + "</ul>";
             html = html + list;
